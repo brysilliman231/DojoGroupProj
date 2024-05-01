@@ -1,0 +1,41 @@
+The Premise of this project is a profit calculator for over the road trucking
+
+The goal of this project is to provide a trip planner for truckers that includes options for
+calculating the total profit that will be made during a specific route. The user will begin by creating an account.
+From there they will create a trip and enter in the beginning and ending destinations with accompanying mileage.
+From there they will enter a bunch of subsequent information including but not limited to,
+
+Fuel tank capacity
+Fuel mileage
+Mileage rebate (if offered by their company)
+Price of the load.
+Other costs such as tolls and other things.
+
+And when all that is entered in the user will then submit this information, where the website will take all those values
+and calculate the net profit that the driver will recieve at the end of the route.
+
+Depending on the logged in user they will be able to track a list of trips theyve taken and will ge aggrigate information about 
+their driving habits such as average fuel mileage, trip distance, fuel cost, etc to give a net profit of all the trips that user has entered
+
+Responsibilities:
+
+Jason Vega: Backend and the required math done in javascript
+
+Bryant Silliman: Front end and anything to do with the visual structure
+
+MVC:
+
+Ability to create and edit user accounts
+Can enter new trips, modify those trips, and delete the trips if necessary
+Upon trip entry a net profit will be calculated
+
+Backlog:
+
+Aggregate information for the driver as mentioned above.
+Maps integration to get things such as alternate routes
+Ability to choose their truck models and have information prefill based on that info
+Fuel stop suggestions
+Suggest lodging and other accomodations if trip exceeds the limit theyre allowed to drive in a day.
+
+
+Wireframe: https://www.figma.com/file/n5sD620HL5TyYyFBVrFZmP/Group-Project-Wireframe?type=design&node-id=0-1&mode=design&t=QOiUWyTajBhPfm2I-0
