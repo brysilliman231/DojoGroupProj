@@ -24,7 +24,7 @@ class Trip:
                 LEFT JOIN users
                 ON trips.user_id = users.id
         """
-        results = connectToMySQL('trucking_schema').query_db(query, data)
+        results = connectToMySQL('trucking').query_db(query, data)
 
         trips = []
 
@@ -57,7 +57,7 @@ class Trip:
                     charge = %(charge)s,
                     user_id = %(user_id)s);
                 """
-        return connectToMySQL('trucking_schema').query_db(query, data)
+        return connectToMySQL('trucking').query_db(query, data)
     
     @classmethod
     def get_one(cls, data):
@@ -65,7 +65,7 @@ class Trip:
         query =  """SELECT * FROM trips LEFT JOIN users
                     ON trips.user_id = users.id
                     WHERE trips.id = %(trip_id)s;"""
-        results = connectToMySQL('schema_adventure').query_db(query, data)
+        results = connectToMySQL('trucking').query_db(query, data)
     
         print("results from get one: ", results)
 
@@ -94,14 +94,14 @@ class Trip:
                     WHERE
                     trips.id = %(trip_id)s
                 """
-        result = connectToMySQL('trucking_schema').query_db(query,data)
+        result = connectToMySQL('trucking').query_db(query,data)
         print("result in update", result)
         return result
     
     @classmethod
     def destroy(cls, id):
         query = "DELETE FROM trips WHERE id=%(id)s"
-        return connectToMySQL('trucking_schema').query_db(query, {"id":id})
+        return connectToMySQL('trucking').query_db(query, {"id":id})
     
     @staticmethod
     def validate_trip(trip):

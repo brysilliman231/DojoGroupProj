@@ -20,7 +20,7 @@ def register():
         return redirect('/')
 
     pw_hash = bcrypt.generate_password_hash(request.form['password'])
-    
+
     data = {
         "first_name": request.form['first_name'],
         "last_name": request.form['last_name'],
@@ -54,17 +54,23 @@ def login():
 
 @app.route('/dashboard')
 def dashboard():
+    # Debug: Check if user_id is in session
     if 'user_id' not in session:
-        return redirect('/logout')
-    
-    data = {
-        'id': session['user_id']
-    }
+        print("No user_id in session, adding temporary user_id for testing.")
+        session['user_id'] = 1  # Ensure this ID exists in your User database
 
-    user = User.get_by_id(data)  # Retrieve the user object
-    trips = trip.Trip.get_all(data)
+    # Now assuming we always have a user_id in session
+    data = {'id': session['user_id']}
+    user = User.get_by_id(data)
+    trips = Trip.get_all(data)
 
+    if user is None:
+        print("No user found, check user_id and User.get_by_id method.")
+        return redirect('/logout')  # or handle this scenario appropriately
+
+    print("Displaying dashboard for user_id:", session['user_id'])
     return render_template("dashboard.html", user=user, trips=trips)
+
 
 @app.route('/users/<int:id>')
 def view_user(id):
