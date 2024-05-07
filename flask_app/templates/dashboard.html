@@ -2,45 +2,46 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard</title>
+    <title>Trucking Company Dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
 </head>
 <body>
     <section class="section">
         <div class="container">
-            <h1 class="title">Dashboard</h1>
+            <h1 class="title">Trucking Company Dashboard</h1>
             <div class="columns">
                 <div class="column is-one-quarter">
                     <aside class="menu">
                         <p class="menu-label">
-                            General
+                            Trip Management
                         </p>
                         <ul class="menu-list">
-                            <li><a>Dashboard</a></li>
+                            <li><a href="/new-trip">Create New Trip</a></li>
+                            <li><a href="/update-trip">Update Trip</a></li>
+                            <li><a href="/delete-trip">Delete Trip</a></li>
+                            <li><a href="/view-trips">View Trips</a></li>
+                        </ul>
+                        <p class="menu-label">
+                            User Management
+                        </p>
+                        <ul class="menu-list">
                             <li><a>Profile</a></li>
                             <li><a>Settings</a></li>
                         </ul>
                         <p class="menu-label">
-                            Administration
+                            System Administration
                         </p>
                         <ul class="menu-list">
                             <li><a>Team Settings</a></li>
-                            <li><a>Manage Your Team</a>
-                                <ul>
-                                    <li><a>Members</a></li>
-                                    <li><a>Plugins</a></li>
-                                    <li><a>Add a member</a></li>
-                                </ul>
-                            </li>
-                            <li><a>Invitations</a></li>
-                            <li><a>Cloud Storage Environment Settings</a></li>
+                            <li><a>Manage Your Team</a></li>
                             <li><a>Authentication</a></li>
                         </ul>
                     </aside>
                 </div>
                 <div class="column is-three-quarters">
                     <div class="box">
-                        <p>Welcome to your dashboard!</p>
+                        <p>Welcome to your dashboard, [User's Name]!</p>
+                        <p>From here, you can manage all aspects of your trips. Whether you need to create a new trip, update an existing one, delete a trip, or simply view the details of your journeys, everything you need is just a click away.</p>
                     </div>
                 </div>
             </div>

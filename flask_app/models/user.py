@@ -22,7 +22,7 @@ class User:
     @classmethod
     def get_all(cls):
         query = "SELECT * FROM users;"
-        results = connectToMySQL('schema_adventure').query_db(query)
+        results = connectToMySQL('trucking').query_db(query)
         
         users = []
         for row in results:
@@ -38,13 +38,13 @@ class User:
                     (first_name, last_name, email, password)
                         VALUES
                     ( %(first_name)s, %(last_name)s, %(email)s, %(password)s)"""
-        return connectToMySQL('trucking_schema').query_db(query, data)
+        return connectToMySQL('trucking').query_db(query, data)
 
 # grab user with email
     @classmethod
     def get_by_email(cls,data):
         query = "SELECT * FROM users WHERE email = %(email)s;"
-        results = connectToMySQL('trucking_schema').query_db(query,data)
+        results = connectToMySQL('trucking').query_db(query,data)
         if len(results) < 1:
             return False
         return cls(results[0])
@@ -53,7 +53,7 @@ class User:
     @classmethod
     def get_by_id(cls,data):
         query = "SELECT * FROM users WHERE id = %(id)s;"
-        results = connectToMySQL('trucking_schema').query_db(query,data)
+        results = connectToMySQL('trucking').query_db(query,data)
         return cls(results[0])
 
 # registartion validations
@@ -62,7 +62,7 @@ class User:
         is_valid = True
         query = "SELECT * FROM users WHERE email = %(email)s;"
         
-        results = connectToMySQL('trucking_schema').query_db(query,user)
+        results = connectToMySQL('trucking').query_db(query,user)
 
         if len(results) >= 1:
             flash("E-mail already taken.")
@@ -92,7 +92,7 @@ class User:
     @classmethod
     def get_user_trips(cls, data):
         query = "SELECT * FROM users LEFT JOIN trips ON users.id=trips.user_id WHERE users.id=%(id)s"
-        results = connectToMySQL('trucking_schema').query_db(query, data)
+        results = connectToMySQL('trucking').query_db(query, data)
         user = cls(results[0])
         for trip in results:
             trip_data = {
