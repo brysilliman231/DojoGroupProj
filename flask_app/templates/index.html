@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Log in / Register</title>
+</head>
+<body>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <p style="color: red;">{{message}}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <h1>Trucking CO temp placeholder</h1>
+
+    <HR>
+
+    <h1>Register</h1>
+    
+    <form action="/register" method="post">
+    <label for="first_name">First Name: (Min of 2 characters):</label>
+    <input type="text" name="first_name">
+    <label for="last_name">Last Name: (Min of 2 characters):</label>
+    <input type="text" name="last_name">
+    <label for="email">E-Mail: (Must be valid e-mail):</label>
+    <input type="text" name="email">
+    <label for="password">Password (Min of 8 characters):</label>
+    <input type="password" name="password">
+    <label for="confirm">Confirm Password:</label>
+    <input type="password" name="confirm">
+    <input type="submit" value="Register">
+    </form>
+
+    <hr>
+
+    <h1>Log in</h1>
+    <form action="/login" method="POST">
+        <label for="email" >E-Mail:</label>
+        <input type="text" name="email">
+        <label for="password" >Password:</label>
+        <input type="text" name="password">
+        <input type="submit" value="Log In">
+    </form>
+</body>
+</html>
