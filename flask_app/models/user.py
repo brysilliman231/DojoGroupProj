@@ -96,7 +96,7 @@ class User:
         user = cls(results[0])
         for trip in results:
             trip_data = {
-                'id': tripe['trips.id'],
+                'id': trip['trips.id'],
                 'start': request.form['start'],
                 'end': request.form['end'],
                 'fuel': request.form['fuel'],

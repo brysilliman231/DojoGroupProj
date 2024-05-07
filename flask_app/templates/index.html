@@ -4,46 +4,95 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
     <title>Log in / Register</title>
 </head>
 <body>
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            {% for message in messages %}
-                <p style="color: red;">{{message}}</p>
-            {% endfor %}
-        {% endif %}
-    {% endwith %}
-    <h1>Trucking CO temp placeholder</h1>
+    <section class="section">
+        <div class="container">
+            <h1 class="title">Trucking CO temp placeholder</h1>
 
-    <HR>
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <p class="notification is-danger">{{ message }}</p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
 
-    <h1>Register</h1>
-    
-    <form action="/register" method="post">
-    <label for="first_name">First Name: (Min of 2 characters):</label>
-    <input type="text" name="first_name">
-    <label for="last_name">Last Name: (Min of 2 characters):</label>
-    <input type="text" name="last_name">
-    <label for="email">E-Mail: (Must be valid e-mail):</label>
-    <input type="text" name="email">
-    <label for="password">Password (Min of 8 characters):</label>
-    <input type="password" name="password">
-    <label for="confirm">Confirm Password:</label>
-    <input type="password" name="confirm">
-    <input type="submit" value="Register">
-    </form>
+            <div class="buttons">
+                <a href="/dashboard" class="button is-primary is-fullwidth">Go to Dashboard (Bypass)</a>
+            </div>
 
-    <hr>
+            <div class="columns">
+                <div class="column">
+                    <h2 class="subtitle">Register</h2>
+                    <form action="/register" method="post">
+                        <div class="field">
+                            <label class="label">First Name: (Min of 2 characters)</label>
+                            <div class="control">
+                                <input class="input" type="text" name="first_name" required minlength="2">
+                            </div>
+                        </div>
 
-    <h1>Log in</h1>
-    <form action="/login" method="POST">
-        <label for="email" >E-Mail:</label>
-        <input type="text" name="email">
-        <label for="password" >Password:</label>
-        <input type="text" name="password">
-        <input type="submit" value="Log In">
-    </form>
+                        <div class="field">
+                            <label class="label">Last Name: (Min of 2 characters)</label>
+                            <div class="control">
+                                <input class="input" type="text" name="last_name" required minlength="2">
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">E-Mail: (Must be valid e-mail)</label>
+                            <div class="control">
+                                <input class="input" type="email" name="email" required>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Password (Min of 8 characters)</label>
+                            <div class="control">
+                                <input class="input" type="password" name="password" required minlength="8">
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Confirm Password:</label>
+                            <div class="control">
+                                <input class="input" type="password" name="confirm" required>
+                            </div>
+                        </div>
+
+                        <div class="control">
+                            <button type="submit" class="button is-link">Register</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="column">
+                    <h2 class="subtitle">Log in</h2>
+                    <form action="/login" method="POST">
+                        <div class="field">
+                            <label class="label">E-Mail:</label>
+                            <div class="control">
+                                <input class="input" type="text" name="email" required>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Password:</label>
+                            <div class="control">
+                                <input class="input" type="password" name="password" required>
+                            </div>
+                        </div>
+
+                        <div class="control">
+                            <button type="submit" class="button is-link">Log In</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
 </body>
 </html>
