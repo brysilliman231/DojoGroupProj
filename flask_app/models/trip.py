@@ -1,6 +1,7 @@
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask import flash , request
-from flask_app.models import user, trip
+from flask_app.models import user
+from flask_app.models import trip
 
 
 class Trip:
@@ -37,7 +38,7 @@ class Trip:
                 'email': row['email'],
                 'password': row['password'],
             }
-            this_adventure.user = user.User(user_data)
+            this_trip.user = user.User(user_data)
 
             trips.append(this_trip)
 

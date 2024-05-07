@@ -1,6 +1,7 @@
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask import flash
 import re
+from flask import request
 
 from flask_app.models import  trip, user
 from flask_app.models.trip import Trip
