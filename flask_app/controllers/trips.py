@@ -10,7 +10,7 @@ from flask_app.models.user import User
 @app.route('/trips/add', methods=['GET', 'POST'])
 def add_trip():
     if request.method == 'GET':
-        return render_template("add_trip.html")
+        return render_template("new_trip.html")
 
     if not Trip.validate_trip(request.form):
         flash("Invalid data. Please check your input.", "error")

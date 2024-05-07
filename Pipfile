@@ -9,6 +9,7 @@ flask = "*"
 pymysql = "*"
 shell = "*"
 cryptography = "*"
+flask-googlemaps = "8"
 
 [dev-packages]
 
