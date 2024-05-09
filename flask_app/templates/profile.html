@@ -8,11 +8,25 @@
 <body>
     <section class="section">
         <div class="container">
-            <h1 class="title">Your Profile</h1>
-            <p><strong>Truck Type:</strong> {{ user_profile.truck_type }}</p>
-            <p><strong>Favorite Food:</strong> {{ user_profile.favorite_food }}</p>
-            <p><strong>Fun Fact:</strong> {{ user_profile.fun_fact }}</p>
-            <a href="/edit_profile" class="button is-warning">Edit Profile</a>
+            <div class="columns">
+                <!-- Profile Image Column -->
+                <div class="column is-one-third">
+                    <figure class="image is-3by4">
+                        <img src="https://via.placeholder.com/300x400" alt="Profile Image Placeholder">
+                    </figure>
+                </div>
+                <!-- Profile Details Column -->
+                <div class="column is-two-thirds">
+                    <div class="box">
+                        <h1 class="title is-2">Your Profile</h1>
+                        <hr>
+                        <p class="subtitle is-4"><strong>Truck Type:</strong> {{ user_profile.truck_type }}</p>
+                        <p class="subtitle is-4"><strong>Favorite Food:</strong> {{ user_profile.favorite_food }}</p>
+                        <p class="subtitle is-4"><strong>Fun Fact:</strong> {{ user_profile.fun_fact }}</p>
+                        <a href="/edit_profile" class="button is-warning is-large">Edit Profile</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 </body>
