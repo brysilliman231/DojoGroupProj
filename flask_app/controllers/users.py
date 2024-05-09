@@ -1,4 +1,4 @@
-from flask import render_template, redirect, session, request, flash
+from flask import render_template, redirect, session, request, flash, url_for
 from flask_app import app
 from flask_app.models.user import User
 from flask_app.models import trip
@@ -56,22 +56,20 @@ def login():
 
 @app.route('/dashboard')
 def dashboard():
-    # Debug: Check if user_id is in session
     if 'user_id' not in session:
-        print("No user_id in session, adding temporary user_id for testing.")
-        session['user_id'] = 1  # Ensure this ID exists in your User database
+        flash("Please log in to access the dashboard.")
+        return redirect(url_for('login'))
 
-    # Now assuming we always have a user_id in session
-    data = {'id': session['user_id']}
-    user = User.get_by_id(data)
-    trips = Trip.get_all(data)
+    user_id = session['user_id']
+    trips = Trip.get_all_by_user_id({'user_id': user_id})  # This method needs to exist and work correctly
 
-    if user is None:
-        print("No user found, check user_id and User.get_by_id method.")
-        return redirect('/logout')  # or handle this scenario appropriately
+    user = User.get_by_id({'id': user_id})  # Assuming you have this method
+    if not user:
+        flash("User not found.")
+        return redirect(url_for('login'))
 
-    print("Displaying dashboard for user_id:", session['user_id'])
-    return render_template("dashboard.html", user=user, trips=trips)
+    return render_template('dashboard.html', trips=trips, user=user)
+
 
 
 @app.route('/users/<int:id>')

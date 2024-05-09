@@ -121,3 +121,13 @@ class Trip:
             flash("How much are your charging!")
             is_valid= False
         return is_valid
+    
+
+    @classmethod
+    def get_all_by_user_id(cls, data):
+        query = "SELECT * FROM trips WHERE user_id = %(user_id)s;"
+        results = connectToMySQL('trucking').query_db(query, data)
+        trips = []
+        for row in results:
+            trips.append(cls(row))
+        return trips

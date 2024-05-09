@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
+    <title>View Trip</title>
+</head>
+<body>
+    <section class="section">
+        <div class="container">
+            <h1 class="title">Viewing Trip: {{ trip.start }} to {{ trip.end }}</h1>
+            <div class="content">
+                <p><strong>Start Location:</strong> {{ trip.start }}</p>
+                <p><strong>End Location:</strong> {{ trip.end }}</p>
+                <p><strong>Fuel:</strong> {{ trip.fuel }}</p>
+                <p><strong>Mileage:</strong> {{ trip.mileage }}</p>
+                <p><strong>Weight:</strong> {{ trip.weight }}</p>
+                <p><strong>Price per Mile:</strong> {{ trip.ppm }}</p>
+                <p><strong>Charge:</strong> {{ trip.charge }}</p>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

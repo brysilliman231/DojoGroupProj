@@ -43,6 +43,25 @@
                     <div class="box">
                         <p>Welcome to your dashboard, [User's Name]!</p>
                         <p>From here, you can manage all aspects of your trips. Whether you need to create a new trip, update an existing one, delete a trip, or simply view the details of your journeys, everything you need is just a click away.</p>
+                        <!-- Table displaying trips -->
+                        <table class="table is-fullwidth is-hoverable">
+                            <thead>
+                                <tr>
+                                    <th>Start Location</th>
+                                    <th>End Location</th>
+                                    <th>Details</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for trip in trips %}
+                                <tr>
+                                    <td>{{ trip.start }}</td>
+                                    <td>{{ trip.end }}</td>
+                                    <td><a href="{{ url_for('view_trip', id=trip.id) }}" class="button is-small is-link">View</a></td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

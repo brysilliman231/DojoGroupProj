@@ -36,6 +36,8 @@ def add_trip():
     try:
         Trip.save(data)
         flash("Trip added successfully.", "success")
+        print("Data being saved:", data)
+
     except Exception as e:
         flash(str(e), "error")  # Display any SQL errors as flash messages
 
