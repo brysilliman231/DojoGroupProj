@@ -12,14 +12,21 @@
             <div class="box">
                 <p><strong>Start Location:</strong> {{ trip.start }}</p>
                 <p><strong>End Location:</strong> {{ trip.end }}</p>
-                <p><strong>Fuel:</strong> {{ trip.fuel }}</p>
-                <p><strong>Mileage:</strong> {{ trip.mileage }}</p>
-                <p><strong>Weight:</strong> {{ trip.weight }}</p>
-                <p><strong>Price per Mile:</strong> {{ trip.ppm }}</p>
-                <p><strong>Charge:</strong> {{ trip.charge }}</p>
+                <p><strong>Distance:</strong> {{ trip.distance }} miles</p>
+                <p><strong>Fuel Cost per Gallon:</strong> ${{ trip.fuel }}</p>
+                <p><strong>Truck Mileage:</strong> {{ trip.mileage }} mpg</p>
+                <p><strong>Weight of Load:</strong> {{ trip.weight }} lbs</p>
+                <p><strong>Price per Mile:</strong> ${{ trip.ppm }}</p>
+                <p><strong>Price of Load:</strong> ${{ trip.charge }}</p>
+
+
                 <!-- Buttons for update and delete -->
                 <a href="{{ url_for('update_trip', id=trip.id) }}" class="button is-warning">Edit Trip</a>
                 <button class="button is-danger" onclick="confirmDelete('{{ trip.id }}')">Delete Trip</button>
+            </div>
+            <div class="box">
+                <h2 class="title is-2 has-text-centered">Net Profit</h2>
+                <p class="subtitle is-1 has-text-centered has-text-success"> ${{ net_profit }}</p>
             </div>
         </div>
     </section>

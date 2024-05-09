@@ -6,51 +6,54 @@ from flask_app.controllers import users
 from flask_app.models import user
 from flask_app.models.user import User
 
-
 @app.route('/trips/add', methods=['GET', 'POST'])
 def add_trip():
-    if request.method == 'GET':
-        return render_template("new_trip.html")
+    if request.method == 'POST':
+        # Ensure all necessary fields are included
+        if not Trip.validate_trip(request.form):
+            flash('Validation failed, please check your input.')
+            return redirect('/trips/add')
 
-    print("Form data:", request.form)  # Debug statement to print form data
-
-    if not Trip.validate_trip(request.form):
-        flash("Invalid data. Please check your input.", "error")
-        return redirect("/trips/add")  # Redirect back if data is invalid
-
-    user_id = request.form.get('user_id')
-    if not user_id.isdigit():  # Checks if the user_id is a digit, indicating it's a valid integer
-        flash("Invalid user ID. Please log in again.", "error")
-        return redirect("/login")  # Redirect to login if user_id is invalid or missing
-
-    data = {
-        'start': request.form['start'],
-        'end': request.form['end'],
-        'fuel': request.form['fuel'],
-        'mileage': request.form['mileage'],
-        'weight': request.form['weight'],
-        'ppm': request.form['ppm'],
-        'charge': request.form['charge'],
-        'user_id': int(user_id)  # Ensures user_id is converted to an integer
-    }
-    try:
+        data = {
+            'start': request.form['start'],
+            'end': request.form['end'],
+            'fuel': request.form['fuel'],
+            'mileage': request.form['mileage'],
+            'weight': request.form['weight'],
+            'ppm': request.form['ppm'],
+            'charge': request.form['charge'],
+            'user_id': session['user_id'],
+            'distance': request.form['distance']  # New distance field
+        }
         Trip.save(data)
-        flash("Trip added successfully.", "success")
-        print("Data being saved:", data)
+        flash('Trip added successfully.')
+        return redirect('/dashboard')
+    return render_template("new_trip.html")
 
-    except Exception as e:
-        flash(str(e), "error")  # Display any SQL errors as flash messages
-
-    return redirect("/dashboard")
-
-@app.route("/trips/<int:id>")
+@app.route('/trips/<int:id>')
 def view_trip(id):
-    data = {
-        'trip_id': id,
-        'user_id': session["user_id"]
-    }
+    data = {'trip_id': id}
     trip = Trip.get_one(data)
-    return render_template("view_trip.html", trip=trip)
+    if trip:
+        # Calculate net profit using attributes of the trip object
+        price_of_load = float(trip.charge)
+        price_per_mile = float(trip.ppm)
+        distance = float(trip.distance)
+        mileage = float(trip.mileage)
+        fuel_cost_per_gallon = float(trip.fuel)
+
+        revenue = price_of_load + (price_per_mile * distance)
+        expenses = (distance / mileage) * fuel_cost_per_gallon
+        net_profit = revenue - expenses
+        print("Net Profit: ", net_profit)
+
+
+        # Pass the trip object and calculated net profit to the template
+        return render_template("view_trip.html", trip=trip, net_profit=round(net_profit, 2))
+    else:
+        flash("Trip not found.")
+        return redirect(url_for('dashboard'))
+
 
 @app.route("/trips/<int:id>/update", methods=["GET", "POST"])
 def update_trip(id):
@@ -60,11 +63,16 @@ def update_trip(id):
             "trip_id": id
         }
         trip = Trip.get_one(data)
+        if not trip:
+            flash("Trip not found.")
+            return redirect(url_for('dashboard'))
         print("trip data for edit page: ", trip)
-        return render_template("update_trip.html", trip=trip)
+        return render_template("edit_trip.html", trip=trip)
     
+    # Ensure the validation check happens in both GET (above) and POST (below)
     if not Trip.validate_trip(request.form):
-        return redirect('/trips/{id}/update')
+        flash('Validation failed, please check your input.')
+        return redirect(url_for('update_trip', id=id))
     
     data = {
         'trip_id': id,
@@ -76,10 +84,19 @@ def update_trip(id):
         'ppm': request.form['ppm'],
         'charge': request.form['charge'],
     }
-    trip = Trip.update(data)
-    return redirect("/dashboard")
+    result = Trip.update(data)
+    if result:
+        flash('Trip updated successfully.')
+    else:
+        flash('Failed to update trip.')
+    
+    return redirect(url_for("dashboard"))
 
 @app.route("/trips/<int:id>/delete")
 def destroy_trip(id):
-    Trip.destroy(id)
-    return redirect("/dashboard")
+    result = Trip.destroy(id)
+    if result:
+        flash('Trip deleted successfully.')
+    else:
+        flash('Failed to delete trip.')
+    return redirect(url_for("dashboard"))

@@ -15,6 +15,7 @@ class Trip:
         self.ppm = data['ppm']
         self.charge = data['charge']
         self.user_id = data['user_id']
+        self.distance = data['distance']
         self.user = None
 
     @classmethod
@@ -47,10 +48,9 @@ class Trip:
     @classmethod
     def save(cls, data):
         query = """
-                    INSERT INTO trips
-                    (start, end, fuel, mileage, weight, ppm, charge, user_id)
-                    VALUES (%(start)s, %(end)s, %(fuel)s, %(mileage)s, %(weight)s, %(ppm)s, %(charge)s, %(user_id)s);
-                """
+            INSERT INTO trips (start, end, fuel, mileage, weight, ppm, charge, user_id, distance)
+            VALUES (%(start)s, %(end)s, %(fuel)s, %(mileage)s, %(weight)s, %(ppm)s, %(charge)s, %(user_id)s, %(distance)s);
+        """
         return connectToMySQL('trucking').query_db(query, data)
     @classmethod
     def get_one(cls, data):
@@ -72,29 +72,24 @@ class Trip:
     
     @classmethod
     def update(cls, data):
-        print("data in update: ", data)
         query = """
-                    UPDATE trips SET
-                    VALUES
-                    start = %(start)s,
-                    end = %(end)s,
-                    fuel = %(fuel)s,
-                    mileage = %(mileage)s,
-                    weight = %(weight)s,
-                    ppm = %(ppm)s,
-                    charge = %(charge)s,
-                    user_id = %(user_id)s);
-                    WHERE
-                    trips.id = %(trip_id)s
-                """
-        result = connectToMySQL('trucking').query_db(query,data)
-        print("result in update", result)
-        return result
+            UPDATE trips SET
+            start = %(start)s,
+            end = %(end)s,
+            fuel = %(fuel)s,
+            mileage = %(mileage)s,
+            weight = %(weight)s,
+            ppm = %(ppm)s,
+            charge = %(charge)s,
+            distance = %(distance)s,
+            WHERE id = %(trip_id)s;
+        """
+        return connectToMySQL('trucking').query_db(query, data)
     
     @classmethod
     def destroy(cls, id):
-        query = "DELETE FROM trips WHERE id=%(id)s"
-        return connectToMySQL('trucking').query_db(query, {"id":id})
+        query = "DELETE FROM trips WHERE id = %(id)s;"
+        return connectToMySQL('trucking').query_db(query, {'id': id})
     
     @staticmethod
     def validate_trip(trip):
