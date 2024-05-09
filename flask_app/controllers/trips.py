@@ -9,13 +9,20 @@ from flask_app.models.user import User
 
 @app.route('/trips/add', methods=['GET', 'POST'])
 def add_trip():
-    print("Accessed add_trip route")
     if request.method == 'GET':
         return render_template("new_trip.html")
 
+    print("Form data:", request.form)  # Debug statement to print form data
+
     if not Trip.validate_trip(request.form):
         flash("Invalid data. Please check your input.", "error")
-        return redirect("/trips/add")  # Redirect back to the add adventure page if data is invalid
+        return redirect("/trips/add")  # Redirect back if data is invalid
+
+    # Safely getting user_id with a default value of None if not found
+    user_id = request.form.get('user_id', None)
+    if user_id is None:
+        flash("User ID is missing. Please log in again.", "error")
+        return redirect("/login")  # Redirect to login if user_id is missing
 
     data = {
         'start': request.form['start'],
@@ -25,7 +32,7 @@ def add_trip():
         'weight': request.form['weight'],
         'ppm': request.form['ppm'],
         'charge': request.form['charge'],
-        'user_id': request.form['user_id']
+        'user_id': user_id
     }
     Trip.save(data)
     flash("Trip added successfully.", "success")
