@@ -5,48 +5,76 @@
     <title>Trucking Company Dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
     <style>
-        body
-        {
-            background-image: url(./static/images/dashboard_background.jpg);
+        html, body {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+        
+        body {
+            background: url('../static/wp3616636.jpg') no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        .box {
+            background-color: rgba(255, 255, 255, 0.9);
+            border: 1px solid #dbe9f6;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .menu-list a {
+            color: #336699;
+        }
+
+        .title, .subtitle {
+            color: #204060;
         }
     </style>
 </head>
 <body>
     <section class="section">
         <div class="container">
-            <h1 class="title">Velocity Hauling Solutions</h1>
-            <h2>Driving Success, Delivering Excellence Domestically!</h2>
+            <!-- Box for the main title -->
+            <div class="box">
+                <h1 class="title">Velocity Hauling Solutions</h1>
+                <h2>Driving Success, Delivering Excellence Domestically!</h2>
+            </div>
             <div class="columns">
+                <!-- Sidebar navigation menu -->
                 <div class="column is-one-quarter">
                     <aside class="menu">
-                        <p class="menu-label">
-                            Trip Management
-                        </p>
-                        <ul class="menu-list">
-                            <li><a href="/trips/add">Create New Trip</a></li>
-                        </ul>
-                        <p class="menu-label">
-                            User Management
-                        </p>
-                        <ul class="menu-list">
-                            <li><a href="/profile">View Profile</a></li>
-                            <li><a href="/edit_profile">Edit Profile</a></li>
-                        </ul>
-                        <p class="menu-label">
-                            System Administration
-                        </p>
-                        <ul class="menu-list">
-                            <li><a>Team Settings</a></li>
-                            <li><a>Manage Your Team</a></li>
-                            <li><a>Authentication</a></li>
-                        </ul>
+                        <div class="box">
+                            <p class="menu-label">Trip Management</p>
+                            <ul class="menu-list">
+                                <li><a href="/trips/add">Create New Trip</a></li>
+                            </ul>
+                            <p class="menu-label">User Management</p>
+                            <ul class="menu-list">
+                                <li><a href="/profile">View Profile</a></li>
+                                <li><a href="/edit_profile">Edit Profile</a></li>
+                            </ul>
+                            <p class="menu-label">System Administration</p>
+                            <ul class="menu-list">
+                                <li><a>Team Settings</a></li>
+                                <li><a>Manage Your Team</a></li>
+                                <li><a>Authentication</a></li>
+                            </ul>
+                        </div>
                     </aside>
                 </div>
+                <!-- Main content area -->
                 <div class="column is-three-quarters">
                     <div class="box">
-                        <p>Welcome to your dashboard, [User's Name]!</p>
+                        <p><u>Welcome to your dashboard!</u></p>
                         <p>From here, you can manage all aspects of your trips. Whether you need to create a new trip, update an existing one, delete a trip, or simply view the details of your journeys, everything you need is just a click away.</p>
-                        <!-- Table displaying trips -->
+                    </div>
+                    <!-- Box for the trips table -->
+                    <div class="box">
                         <table class="table is-fullwidth is-hoverable">
                             <thead>
                                 <tr>
