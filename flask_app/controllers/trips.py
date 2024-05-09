@@ -18,11 +18,10 @@ def add_trip():
         flash("Invalid data. Please check your input.", "error")
         return redirect("/trips/add")  # Redirect back if data is invalid
 
-    # Safely getting user_id with a default value of None if not found
-    user_id = request.form.get('user_id', None)
-    if user_id is None:
-        flash("User ID is missing. Please log in again.", "error")
-        return redirect("/login")  # Redirect to login if user_id is missing
+    user_id = request.form.get('user_id')
+    if not user_id.isdigit():  # Checks if the user_id is a digit, indicating it's a valid integer
+        flash("Invalid user ID. Please log in again.", "error")
+        return redirect("/login")  # Redirect to login if user_id is invalid or missing
 
     data = {
         'start': request.form['start'],
@@ -32,10 +31,14 @@ def add_trip():
         'weight': request.form['weight'],
         'ppm': request.form['ppm'],
         'charge': request.form['charge'],
-        'user_id': user_id
+        'user_id': int(user_id)  # Ensures user_id is converted to an integer
     }
-    Trip.save(data)
-    flash("Trip added successfully.", "success")
+    try:
+        Trip.save(data)
+        flash("Trip added successfully.", "success")
+    except Exception as e:
+        flash(str(e), "error")  # Display any SQL errors as flash messages
+
     return redirect("/dashboard")
 
 @app.route("/trips/<int:id>")
