@@ -59,7 +59,8 @@
             </div>
 
             <!-- Hidden Input for User ID -->
-            <input type="hidden" name="user_id" value="{{ user_id }}">
+            <input type="hidden" name="user_id" value="{{ session['user_id'] }}">
+
 
             <div class="control">
                 <button type="submit" class="button is-primary">Submit Route Plan</button>

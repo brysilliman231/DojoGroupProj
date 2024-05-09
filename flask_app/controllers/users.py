@@ -37,16 +37,18 @@ def register():
 # login with validations
 @app.route('/login',methods=['POST'])
 def login():
+    if request.method == 'GET':
+        return render_template('login.html')
     user = User.get_by_email(request.form)
 
     if not user:
         flash("Invalid Email")
         return redirect('/')
-    
+
     if not bcrypt.check_password_hash(user.password, request.form['password']):
         flash("Invalid Password")
         return redirect('/')
-    
+
     print(user.id)
     session['user_id'] = user.id
 
