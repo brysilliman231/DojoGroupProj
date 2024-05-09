@@ -48,17 +48,10 @@ class Trip:
     def save(cls, data):
         query = """
                     INSERT INTO trips
-                    start = %(start)s,
-                    end = %(end)s,
-                    fuel = %(fuel)s,
-                    mileage = %(mileage)s,
-                    weight = %(weight)s,
-                    ppm = %(ppm)s,
-                    charge = %(charge)s,
-                    user_id = %(user_id)s);
+                    (start, end, fuel, mileage, weight, ppm, charge, user_id)
+                    VALUES (%(start)s, %(end)s, %(fuel)s, %(mileage)s, %(weight)s, %(ppm)s, %(charge)s, %(user_id)s);
                 """
         return connectToMySQL('trucking').query_db(query, data)
-    
     @classmethod
     def get_one(cls, data):
         print("data being passed into get one: ",data)
