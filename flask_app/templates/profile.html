@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View Profile</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
+</head>
+<body>
+    <section class="section">
+        <div class="container">
+            <h1 class="title">Your Profile</h1>
+            <p><strong>Truck Type:</strong> {{ user_profile.truck_type }}</p>
+            <p><strong>Favorite Food:</strong> {{ user_profile.favorite_food }}</p>
+            <p><strong>Fun Fact:</strong> {{ user_profile.fun_fact }}</p>
+            <a href="/edit_profile" class="button is-warning">Edit Profile</a>
+        </div>
+    </section>
+</body>
+</html>

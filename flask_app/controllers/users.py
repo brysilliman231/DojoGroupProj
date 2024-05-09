@@ -2,6 +2,7 @@ from flask import render_template, redirect, session, request, flash, url_for
 from flask_app import app
 from flask_app.models.user import User
 from flask_app.models import trip
+from flask_app.models.user import UserProfile
 from flask_app.models.trip import Trip
 from flask_app.controllers import trips
 
@@ -89,3 +90,29 @@ def view_user(id):
 def logout():
     session.clear()
     return redirect('/')
+
+
+@app.route('/profile')
+def profile():
+    user_id = session.get('user_id')
+    if not user_id:
+        return redirect(url_for('login'))
+
+    user_profile = UserProfile.get_by_user_id(user_id)
+    return render_template('profile.html', user_profile=user_profile)
+
+@app.route('/edit_profile', methods=['GET', 'POST'])
+def edit_profile():
+    user_id = session.get('user_id')
+    if not user_id:
+        return redirect(url_for('login'))
+
+    if request.method == 'POST':
+        truck_type = request.form['truck_type']
+        favorite_food = request.form['favorite_food']
+        fun_fact = request.form['fun_fact']
+        UserProfile.update_or_create(user_id, truck_type, favorite_food, fun_fact)
+        return redirect(url_for('profile'))
+
+    user_profile = UserProfile.get_by_user_id(user_id)
+    return render_template('edit_profile.html', user_profile=user_profile)

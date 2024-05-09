@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Profile</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
+</head>
+<body>
+    <section class="section">
+        <div class="container">
+            <h1 class="title">Edit Your Profile</h1>
+            <form action="/update_profile" method="POST">
+                <div class="field">
+                    <label class="label">Truck Type</label>
+                    <div class="control">
+                        <input class="input" type="text" name="truck_type" value="{{ user_profile.truck_type }}" required>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Favorite Food</label>
+                    <div class="control">
+                        <input class="input" type="text" name="favorite_food" value="{{ user_profile.favorite_food }}" required>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Fun Fact</label>
+                    <div class="control">
+                        <textarea class="textarea" name="fun_fact" required>{{ user_profile.fun_fact }}</textarea>
+                    </div>
+                </div>
+                <div class="control">
+                    <button type="submit" class="button is-link">Update Profile</button>
+                </div>
+            </form>
+        </div>
+    </section>
+</body>
+</html>

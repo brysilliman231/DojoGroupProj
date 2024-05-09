@@ -109,3 +109,44 @@ class User:
             this_trip = Trip(trip_data)
             user.trips.append(this_trip)
         return user
+
+
+
+class UserProfile:
+    @classmethod
+    def get_by_user_id(cls, user_id):
+        query = "SELECT * FROM user_profiles WHERE user_id = %(user_id)s;"
+        data = {'user_id': user_id}
+        result = connectToMySQL('trucking').query_db(query, data)
+        if result:
+            return cls(result[0])
+        return None
+
+    @classmethod
+    def update_or_create(cls, user_id, truck_type, favorite_food, fun_fact):
+        # Check if profile exists
+        existing_profile = cls.get_by_user_id(user_id)
+        if existing_profile:
+            query = """
+                UPDATE user_profiles SET truck_type = %(truck_type)s, 
+                favorite_food = %(favorite_food)s, fun_fact = %(fun_fact)s 
+                WHERE user_id = %(user_id)s;
+            """
+        else:
+            query = """
+                INSERT INTO user_profiles (user_id, truck_type, favorite_food, fun_fact) 
+                VALUES (%(user_id)s, %(truck_type)s, %(favorite_food)s, %(fun_fact)s);
+            """
+        data = {
+            'user_id': user_id,
+            'truck_type': truck_type,
+            'favorite_food': favorite_food,
+            'fun_fact': fun_fact
+        }
+        return connectToMySQL('trucking').query_db(query, data)
+
+    def __init__(self, data):
+        self.user_id = data['user_id']
+        self.truck_type = data['truck_type']
+        self.favorite_food = data['favorite_food']
+        self.fun_fact = data['fun_fact']
