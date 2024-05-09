@@ -26,8 +26,8 @@
                             User Management
                         </p>
                         <ul class="menu-list">
-                            <li><a>Profile</a></li>
-                            <li><a>Settings</a></li>
+                            <li><a href="/profile">View Profile</a></li>
+                            <li><a href="/edit_profile">Edit Profile</a></li>
                         </ul>
                         <p class="menu-label">
                             System Administration
@@ -58,6 +58,10 @@
                                     <td>{{ trip.start }}</td>
                                     <td>{{ trip.end }}</td>
                                     <td><a href="{{ url_for('view_trip', id=trip.id) }}" class="button is-small is-link">View</a></td>
+                                </tr>
+                                {% else %}
+                                <tr>
+                                    <td colspan="3">No trips available.</td>
                                 </tr>
                                 {% endfor %}
                             </tbody>
