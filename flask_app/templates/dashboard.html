@@ -4,11 +4,36 @@
     <meta charset="UTF-8">
     <title>Trucking Company Dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .background-image {
+            position: fixed; /* Fixed background image */
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background-image: url('flask_app/static/istockphoto-520703835-612x612.jpg');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.5; /* Adjust opacity as needed */
+            z-index: -1; /* Ensure the image stays behind other content */
+        }
+
+        .content-container {
+            position: relative;
+            z-index: 10; /* Higher index to keep content above the background */
+        }
+    </style>
 </head>
 <body>
     <section class="section">
         <div class="container">
-            <h1 class="title">Trucking Company Dashboard</h1>
+            <h1 class="title">Freight Flow Logistics</h1>
             <h2>Driving Success, Delivering Excellence Domestically!</h2>
             <div class="columns">
                 <div class="column is-one-quarter">
