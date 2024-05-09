@@ -9,6 +9,7 @@ from flask_app.models.user import User
 
 @app.route('/trips/add', methods=['GET', 'POST'])
 def add_trip():
+    print("Accessed add_trip route")
     if request.method == 'GET':
         return render_template("new_trip.html")
 
