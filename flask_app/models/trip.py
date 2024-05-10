@@ -69,7 +69,6 @@ class Trip:
             # Handle the case where results is not as expected
             return None
 
-    
     @classmethod
     def update(cls, data):
         query = """
@@ -81,11 +80,10 @@ class Trip:
             weight = %(weight)s,
             ppm = %(ppm)s,
             charge = %(charge)s,
-            distance = %(distance)s,
+            distance = %(distance)s
             WHERE id = %(trip_id)s;
         """
         return connectToMySQL('trucking').query_db(query, data)
-    
     @classmethod
     def destroy(cls, id):
         query = "DELETE FROM trips WHERE id = %(id)s;"

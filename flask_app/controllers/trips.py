@@ -83,6 +83,7 @@ def update_trip(id):
         'weight': request.form['weight'],
         'ppm': request.form['ppm'],
         'charge': request.form['charge'],
+        'distance': request.form ['distance'],
     }
     result = Trip.update(data)
     if result:
